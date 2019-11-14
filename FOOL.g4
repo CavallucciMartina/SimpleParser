@@ -11,7 +11,7 @@ prog returns [Node ast]: e=exp { $ast=new ProgNode($e.ast);} SEMIC EOF { System.
 
 exp returns [Node ast]: t=term {$ast = $t.ast;} (PLUS t2=term {$ast= new PlusNode($ast,$t2.ast);})*;
 term returns [Node ast]: v=factor {$ast = $v.ast;} (TIMES v2=factor {$ast=new MultNode($ast,$v2.ast);})*;
-factor returns [Node ast]: v=value {$ast =$v.ast;} (EQ v2=value {$ast = new EqualNode($ast,$v2.ast);});
+factor returns [Node ast]: v=value {$ast =$v.ast;} (EQ v2=value {$ast = new EqualNode($ast,$v2.ast);})*;
 value returns [Node ast] :
 				n= INTEGER{$ast=new IntNode(Integer.parseInt($n.text));}
 				|TRUE
